@@ -1,0 +1,1 @@
+Here will be resource and examples for 6-th group.
