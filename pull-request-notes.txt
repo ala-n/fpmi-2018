@@ -35,3 +35,37 @@ PR создается в GitHub кнопкой "New Pull Request"
 настройках проекта:
 Settings (вкладка доступна когда выбран репозиторий) -> Collaborators -> Add
 Ники кураторов можно посмотреть в списке Watchers (куратры уже должны были отметится там) или в общей табличке группы.
+
+PS: C момента второго задания можно ользоваться инструментами IDE для работы с Git
+
+PPS: Итого алгоритм исполнения задания :)
+
+gitBash.do('git checkout -b task-N ');
+
+while ( !task.isCompleted() ) {
+  doWork();
+  gitBash.do('git commit -m"Done a great pice of work"');
+  
+  // gitBash.do('git push origin task-N'); - if u whant to (but not needed if u work on single PC)
+}
+
+gitBash.do('git push origin task-N');
+
+browser.open('github.com/nick/repositoryName');
+browser.click('New pull request');
+
+var pr = browser.get('form');
+pr.checkChanges();
+pr.fill('PR Name');
+pr.fill('Description');
+pr.reviewers.add(['ala-n', 'djadjka']);
+pr.submit();
+
+while(pr.haveCriticalIssues()) {
+  doRework();
+  gitBash.do('git commit -m"Rework my mistake"');  
+  gitBash.do('git push origin task-N'); // PR will be updated automatically
+}
+
+get('mark');
+beHappy();
